@@ -14,7 +14,7 @@ Next, and throughout the development process, add `print` statements with the `t
 
 ```lua
 function love.load()
-	print("tts:New Game Started!")
+  print("tts:New Game Started!")
 end
 ```
 
