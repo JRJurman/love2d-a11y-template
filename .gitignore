@@ -1,0 +1,6 @@
+# example and generated output of love.js for the sample game
+sample/a11y.love
+sample/a11y
+
+# love.js dependency
+sample/node_modules
