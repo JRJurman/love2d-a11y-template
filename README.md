@@ -45,6 +45,17 @@ For immediate testing, you can run a local server with `npx serve` and navigate 
 npx serve a11y
 ```
 
+## Sample Application
+
+If you want to test what the project looks like, you can clone this repo, navigate to the `sample` directory in your terminal, and run the following:
+```
+npm ci
+npm run build
+npm start
+```
+
+This will do the above steps, and launch a very simple counter application.
+
 ## Motivation
 
 This gives developers an easy interface to work with, and allows end-users to use any browser-compatible screen reader. The interface and presentation is non-invasive for users who don't need screen-reader support, while offering that option for users who would benefit from it.
