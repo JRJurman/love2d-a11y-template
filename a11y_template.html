@@ -14,7 +14,7 @@
       <div>
         <h1>a11y</h1>
         <canvas id="loadingCanvas" oncontextmenu="event.preventDefault()" width="800" height="600"></canvas>
-        <canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+        <canvas id="canvas" aria-label="Game Canvas" oncontextmenu="event.preventDefault()" tabindex="1"></canvas>
       </div>
     </center>
 
@@ -136,12 +136,7 @@
     </style>
 
     <!-- div with text content to read out to user -->
-    <div id="loveReadout" aria-live="assertive" role="presentation">a11y template</div>
-
-    <!-- script to focus the readout (so we immediately start there) -->
-    <script>
-      canvas.focus()
-    </script>
+    <div id="loveReadout" aria-label="screen reader output" aria-live="assertive" role="presentation"></div>
 
     <!-- script to override console log with text readout -->
     <script>

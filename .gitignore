@@ -3,4 +3,5 @@ sample/a11y.love
 sample/a11y
 
 # love.js dependency
+node_modules
 sample/node_modules
