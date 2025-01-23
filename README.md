@@ -38,6 +38,13 @@ cp a11y_template.html a11y/index.html
 > [!important]
 > It is recommended that you keep a copy of this template separate, so that you can copy this file after re-generating the template, otherwise it will be blown away.
 
+Start the project locally with whatever server you'd like, or build an executable using tools like [Electron](https://www.electronjs.org/).
+
+For immediate testing, you can run a local server with `npx serve` and navigate to `localhost:3000`:
+```sh
+npx serve a11y
+```
+
 ## Motivation
 
 This gives developers an easy interface to work with, and allows end-users to use any browser-compatible screen reader. The interface and presentation is non-invasive for users who don't need screen-reader support, while offering that option for users who would benefit from it.
