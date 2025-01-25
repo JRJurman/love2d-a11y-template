@@ -4,7 +4,17 @@ function love.load()
 end
 
 function love.draw()
-	love.graphics.print(count, 50, 50)
+	local spacing = 50
+	local size = 20
+	local cols = 10
+	local xStart = 50
+	local yStart = 50
+
+	for i = 0, count - 1 do
+			local x = xStart + (i % cols) * spacing
+			local y = yStart + math.floor(i / cols) * spacing
+			love.graphics.circle("fill", x, y, size)
+	end
 end
 
 function love.keypressed(key)
