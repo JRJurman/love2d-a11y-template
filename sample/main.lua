@@ -1,6 +1,7 @@
 function love.load()
-	count = 0
-	print("tts:Accessibility Example using a11y love JS template. Press up to increment counter, or down to decrement.")
+	count = 5
+	started = false
+	print("tts:There are 5 white dots on a black background. Press up to increase the number, or down to decrease the number.")
 end
 
 function love.draw()
@@ -18,11 +19,15 @@ function love.draw()
 end
 
 function love.keypressed(key)
-	started = true
 	if key == "up" then
 		count = count + 1
 	elseif key == "down" then
 		count = count - 1
 	end
-	print("tts:Count "..count)
+	if (not started) then
+		print("tts: There are "..count.." dots")
+		started = true
+	else
+		print("tts:"..count.." dots")
+	end
 end
