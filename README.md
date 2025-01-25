@@ -2,6 +2,9 @@
 
 Accessible HTML template for [LÖVE / Love2d](https://love2d.org/) games, with a live read out for screen readers.
 
+<img width="1029" alt="image" src="https://github.com/user-attachments/assets/0e96823c-45e0-47bb-a4a4-12572ced1c5b" />
+
+
 ## Requirements
 
 This depends on you being able to export your game with [love.js](https://github.com/2dengine/love.js).
