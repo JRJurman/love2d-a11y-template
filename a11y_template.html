@@ -9,12 +9,26 @@
     <!-- Load custom style sheet -->
     <link rel="stylesheet" type="text/css" href="theme/love.css">
   </head>
-  <body>
+  <body style="background: black">
     <main id="container" role="application" aria-live="false">
+      <div id="loveReadout" aria-label="" aria-live="assertive" role="presentation">Loading...</div>
       <canvas id="loadingCanvas" oncontextmenu="event.preventDefault()" width="800" height="600"></canvas>
-      <canvas id="canvas" aria-label="Game Canvas, hit enter to start" oncontextmenu="event.preventDefault()" tabindex="1"></canvas>
-      <div id="loveReadout" aria-label="screen reader output" aria-live="assertive" role="presentation"></div>
+      <canvas id="canvas" aria-label="Game Canvas" oncontextmenu="event.preventDefault()" tabindex="1"></canvas>
     </main>
+
+    <script>
+      // trap the events that get attached to the canvas - if we try to add a "wheel" one,
+      // disable it - we need that event listener off to support pinch-zoom interactions
+      const realAddEventListener = canvas.addEventListener;
+
+      canvas.addEventListener = function (type, ...args) {
+        if (type === 'wheel') {
+          // do nothing
+          return;
+        }
+        return realAddEventListener.call(this, type, ...args);
+      }
+    </script>
 
     <script type='text/javascript'>
       var loadingContext = document.getElementById('loadingCanvas').getContext('2d');
@@ -89,15 +103,9 @@
 
     <!-- a11y template content -->
 
-    <!-- include Atkinson Hyperlegible font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap" rel="stylesheet">
-
     <style>
       /* styling of the container to lay out loveReadout correctly */
       #container {
-
         display: grid;
         height: 100vh;
         width: 100vw;
@@ -108,12 +116,13 @@
           '. canvas    .'
           '. readout   .';
 
-        #canvas {
+        #canvas, #loadingCanvas {
           grid-area: canvas;
-        }
-
-        #loadingCanvas {
-          grid-area: canvas;
+          width: 100vw;
+          height: 100vh;
+          max-height: calc(100vw* 3 / 4);
+          max-width: calc(100vh* 4 / 3);
+          margin: auto;
         }
 
         #loveReadout {
@@ -121,20 +130,9 @@
         }
       }
 
-      /* make font large, and use atkinson hyperlegible font */
       #loveReadout {
-        font-family: "Atkinson Hyperlegible", sans-serif;
-        font-size: 2em;
-        /* opacity: 0; if you'd like to hide the text out, use this css */
-
-        color: white;
-        background: black;
-
-        text-align: center;
-        margin: auto;
-        width: 800px;
-        padding: 0.2em;
-        height: 100%;
+        font-size: 0.001px;
+        opacity: 0;
       }
     </style>
 
@@ -144,6 +142,9 @@
       console.log = (text, ...args) => {
         if (text.startsWith('tts:')) {
           loveReadout.textContent = text.split('tts:').at(1);
+        }
+        if (text.startsWith('Error: ')) {
+          loveReadout.textContent = 'Apologies, the game has crashed with an unhandled error.';
         }
         realConsoleLog(text, ...args)
       }
