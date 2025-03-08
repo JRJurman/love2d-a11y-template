@@ -20,12 +20,12 @@ end
 
 function love.keypressed(key)
 	if key == "up" then
-		count = count + 1
+		count = math.min(count + 1, 99)
 	elseif key == "down" then
-		count = count - 1
+		count = math.max(count - 1, 0)
 	end
 	if (not started) then
-		print("tts: There are "..count.." dots")
+		print("tts: There are "..count.." dots, press up to add more, and down to remove them")
 		started = true
 	else
 		print("tts:"..count.." dots")

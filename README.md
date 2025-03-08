@@ -1,4 +1,4 @@
-# love-a11y-template
+# love2d-a11y-template
 
 Accessible HTML template for [LÖVE / Love2d](https://love2d.org/) games, with a live read out for screen readers.
 
@@ -11,7 +11,7 @@ This depends on you being able to export your game with [love.js](https://github
 
 ## How To Use
 
-First, copy the `a11y_template.html` in your project, and update title at the top of the page.
+First, copy the `a11y_template.html` into your project.
 
 Next, and throughout the development process, add `print` statements with the `tts:` prefix.
 
