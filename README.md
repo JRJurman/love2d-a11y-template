@@ -2,8 +2,7 @@
 
 Accessible HTML template for [LÖVE / Love2d](https://love2d.org/) games, with a live read out for screen readers.
 
-<img width="1029" alt="image" src="https://github.com/user-attachments/assets/0e96823c-45e0-47bb-a4a4-12572ced1c5b" />
-
+<img width="1029" alt="image" alt="Screenshot, there are 5 white dots on a black background, there is a VoiceOver preview with the following text: 'There are 5 white dots on a black background. Press up to increase the number or down to decrease the number'" src="./sample.png" />
 
 ## Requirements
 
