@@ -10,7 +10,7 @@ This depends on you being able to export your game with [love.js](https://github
 
 ## What is it?
 
-There are three files included in this project that you can copy or reference for your own project. These are based on the love2d-electron-template, and allow you to have both a web export, and a standalone distributable.
+There are three files included in this project that you can copy or reference for your own project. These are based on the [love2d-electron-template](https://github.com/JRJurman/love2d-electron-template), and allow you to have both a web export, and a standalone distributable.
 
 <dl>
 
