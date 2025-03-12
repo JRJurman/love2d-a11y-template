@@ -1,0 +1,12 @@
+{
+  "name": "love2d-a11y-template",
+  "version": "1.0.0",
+  "description": "Accessible HTML template for LÖVE / Love2d games, with a live read out for screen readers.",
+  "main": "index.js",
+  "scripts": {
+    "prep-sample": "cp ./index.js sample/index.js && cp ./a11y_template.html sample/a11y_template.html && cp ./build.sh sample/build.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -4,10 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, minimum-scale=1, maximum-scale=1">
-    <title>a11y template</title>
 
-    <!-- Load custom style sheet -->
-    <link rel="stylesheet" type="text/css" href="theme/love.css">
+    <style>
+      body { margin: 0; }
+
+      /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
+      #canvas {
+        padding-right: 0;
+        display: block;
+        border: 0px none;
+        outline: none;
+        visibility: hidden;
+      }
+    </style>
   </head>
   <body style="background: black">
     <main id="container" role="application" aria-live="false">

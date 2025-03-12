@@ -1,4 +1,5 @@
 function love.load()
+	love.window.setTitle('A11y Sample')
 	count = 5
 	started = false
 	print("tts:There are 5 white dots on a black background. Press up to increase the number, or down to decrease the number.")
@@ -12,9 +13,9 @@ function love.draw()
 	local yStart = 50
 
 	for i = 0, count - 1 do
-			local x = xStart + (i % cols) * spacing
-			local y = yStart + math.floor(i / cols) * spacing
-			love.graphics.circle("fill", x, y, size)
+		local x = xStart + (i % cols) * spacing
+		local y = yStart + math.floor(i / cols) * spacing
+		love.graphics.circle("fill", x, y, size)
 	end
 end
 

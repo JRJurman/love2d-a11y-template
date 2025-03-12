@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, minimum-scale=1, maximum-scale=1">
+
+    <style>
+      body { margin: 0; }
+
+      /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
+      #canvas {
+        padding-right: 0;
+        display: block;
+        border: 0px none;
+        outline: none;
+        visibility: hidden;
+      }
+    </style>
+  </head>
+  <body style="background: black">
+    <main id="container" role="application" aria-live="false">
+      <div id="loveReadout" aria-label="" aria-live="assertive" role="presentation">Loading...</div>
+      <canvas id="loadingCanvas" oncontextmenu="event.preventDefault()" width="800" height="600"></canvas>
+      <canvas id="canvas" aria-label="Game Canvas" oncontextmenu="event.preventDefault()" tabindex="1"></canvas>
+    </main>
+
+    <script>
+      // trap the events that get attached to the canvas - if we try to add a "wheel" one,
+      // disable it - we need that event listener off to support pinch-zoom interactions
+      const realAddEventListener = canvas.addEventListener;
+
+      canvas.addEventListener = function (type, ...args) {
+        if (type === 'wheel') {
+          // do nothing
+          return;
+        }
+        return realAddEventListener.call(this, type, ...args);
+      }
+    </script>
+
+    <script type='text/javascript'>
+      var loadingContext = document.getElementById('loadingCanvas').getContext('2d');
+      function drawLoadingText(text) {
+        var canvas = loadingContext.canvas;
+
+        loadingContext.fillStyle = "rgb(142, 195, 227)";
+        loadingContext.fillRect(0, 0, canvas.scrollWidth, canvas.scrollHeight);
+
+        loadingContext.font = '2em arial';
+        loadingContext.textAlign = 'center'
+        loadingContext.fillStyle = "rgb( 11, 86, 117 )";
+        loadingContext.fillText(text, canvas.scrollWidth / 2, canvas.scrollHeight / 2);
+
+        loadingContext.fillText("Powered By Emscripten.", canvas.scrollWidth / 2, canvas.scrollHeight / 4);
+        loadingContext.fillText("Powered By LÖVE.", canvas.scrollWidth / 2, canvas.scrollHeight / 4 * 3);
+      }
+
+      window.onload = function () { canvas.focus(); };
+      window.onclick = function () { canvas.focus(); };
+
+      window.addEventListener("keydown", function(e) {
+        // space and arrow keys
+        if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+          e.preventDefault();
+        }
+      }, false);
+
+      var Module = {
+        arguments: ["./game.love"],
+        INITIAL_MEMORY: 16777216,
+        printErr: console.error.bind(console),
+        canvas: (function() {
+          var canvas = document.getElementById('canvas');
+
+          // As a default initial behavior, pop up an alert when webgl context is lost. To make your
+          // application robust, you may want to override this behavior before shipping!
+          // See http://www.khronos.org/registry/webgl/specs/latest/1.0/#5.15.2
+          canvas.addEventListener("webglcontextlost", function(e) { alert('WebGL context lost. You will need to reload the page.'); e.preventDefault(); }, false);
+
+          return canvas;
+        })(),
+        setStatus: function(text) {
+          if (text) {
+            drawLoadingText(text);
+          } else if (Module.remainingDependencies === 0) {
+            document.getElementById('loadingCanvas').style.display = 'none';
+            document.getElementById('canvas').style.visibility = 'visible';
+          }
+        },
+        totalDependencies: 0,
+        remainingDependencies: 0,
+        monitorRunDependencies: function(left) {
+          this.remainingDependencies = left;
+          this.totalDependencies = Math.max(this.totalDependencies, left);
+          Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+        }
+      };
+      Module.setStatus('Downloading...');
+      window.onerror = function(event) {
+        // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
+        Module.setStatus('Exception thrown, see JavaScript console');
+        Module.setStatus = function(text) {
+          if (text) Module.printErr('[post-exception status] ' + text);
+        };
+      };
+
+      var applicationLoad = function(e) {
+        Love(Module);
+      }
+    </script>
+
+    <!-- a11y template content -->
+
+    <style>
+      /* styling of the container to lay out loveReadout correctly */
+      #container {
+        display: grid;
+        height: 100vh;
+        width: 100vw;
+        grid-template-rows: 1fr auto 1fr;
+        grid-template-columns: 1fr auto 1fr;
+        grid-template-areas:
+          '. .         .'
+          '. canvas    .'
+          '. readout   .';
+
+        #canvas, #loadingCanvas {
+          grid-area: canvas;
+          width: 100vw;
+          height: 100vh;
+          max-height: calc(100vw* 3 / 4);
+          max-width: calc(100vh* 4 / 3);
+          margin: auto;
+        }
+
+        #loveReadout {
+          grid-area: readout;
+        }
+      }
+
+      #loveReadout {
+        font-size: 0.001px;
+        opacity: 0;
+      }
+    </style>
+
+    <!-- script to override console log with text readout -->
+    <script>
+      const realConsoleLog = console.log;
+      console.log = (text, ...args) => {
+        if (text.startsWith('tts:')) {
+          loveReadout.textContent = text.split('tts:').at(1);
+        }
+        if (text.startsWith('Error: ')) {
+          loveReadout.textContent = 'Apologies, the game has crashed with an unhandled error.';
+        }
+        realConsoleLog(text, ...args)
+      }
+    </script>
+
+    <!-- end a11y template content -->
+
+    <script type="text/javascript" src="game.js"></script>
+    <script async type="text/javascript" src="love.js" onload="applicationLoad(this)"></script>
+  </body>
+</html>

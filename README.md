@@ -8,11 +8,51 @@ Accessible HTML template for [LÖVE / Love2d](https://love2d.org/) games, with a
 
 This depends on you being able to export your game with [love.js](https://github.com/2dengine/love.js).
 
-## How To Use
+## What is it?
 
-First, copy the `a11y_template.html` into your project.
+There are three files included in this project that you can copy or reference for your own project. These are based on the love2d-electron-template, and allow you to have both a web export, and a standalone distributable.
 
-Next, and throughout the development process, add `print` statements with the `tts:` prefix.
+<dl>
+
+<dt><code>index.js</code></dt>
+<dd>This is the javascript entrypoint for the electron app (if you choose to make a standalone distributable). This will run the hosted instance of the love.js project.</dd>
+
+<dt><code>a11y_template.html</code></dt>
+<dd>This is a modified template to center and expand the canvas of the game based on the window size. Specific to this repository, we also bake in a live aria element to read out the state of the game, and enable pinch-zoom in the canvas.</dd>
+
+<dt><code>build.sh</code></dt>
+<dd>This is a set of scripts that you'll want to run to build the final project. You can either trigger this as a shell script, or include it as part of some other build tooling (or even a package.json).</dd>
+
+</dl>
+
+
+## How to Run your game
+
+After you copy the above files into the root folder of your project, you can start the game in either a web browser or as a standalone app.
+
+### Web Instance
+
+```sh
+./build.sh FOLDER_NAME
+npx serve FOLDER_NAME
+```
+
+Where `FOLDER_NAME` is whatever folder you want to create with `love.js`.
+
+### Standalone Instance
+
+To run as an electron app, you can use similar steps as above, instead running the following:
+
+```sh
+./build.sh FOLDER_NAME
+npx electron FOLDER_NAME
+```
+
+To build a standalone executable, follow the instructions in [here](https://github.com/JRJurman/love2d-electron-template?tab=readme-ov-file#packaging-your-project).
+
+## How To Use the Screen Reader output
+
+Throughout the development process, add `print` statements with the `tts:` prefix.
 
 ```lua
 function love.load()
@@ -22,41 +62,9 @@ end
 
 These will be consumed by the html template to be read out by screen readers. This text will also be visible for sighted users looking at the page.
 
-After adding these lines to your game, export following the instructions in [love.js](https://github.com/2dengine/love.js), and copy the `a11y_template.html` to the generated folder as `index.html`
+## Sample
 
-```sh
-# create the game project
-zip a11y.zip main.lua
-mv a11y.zip a11y.love
-
-# export using love.js
-# (depending on your server config, compatibility mode, -c, may not be required)
-love.js a11y.love a11y -t a11y -c
-
-# copy the template over as index.html
-cp a11y_template.html a11y/index.html
-```
-
-> [!important]
-> It is recommended that you keep a copy of this template separate, so that you can copy this file after re-generating the template, otherwise it will be blown away.
-
-Start the project locally with whatever server you'd like, or build an executable using tools like [Electron](https://www.electronjs.org/).
-
-For immediate testing, you can run a local server with `npx serve` and navigate to `localhost:3000`:
-```sh
-npx serve a11y
-```
-
-## Sample Application
-
-If you want to test what the project looks like, you can clone this repo, navigate to the `sample` directory in your terminal, and run the following:
-```
-npm ci
-npm run build
-npm start
-```
-
-This will do the above steps, and launch a very simple counter application.
+You can check out the sample project in the folder in this project, which has gone through all the above steps.
 
 ## Motivation
 
