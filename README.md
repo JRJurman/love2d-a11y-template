@@ -4,7 +4,7 @@ Accessible HTML template for [LÖVE / Love2d](https://love2d.org/) games, with a
 
 ```lua
 function love.load()
-	print("tts:There are 5 white dots on a black background. Press up to increase the number, or down to decrease the number.")
+  print("tts:There are 5 white dots on a black background.")
 end
 ```
 
