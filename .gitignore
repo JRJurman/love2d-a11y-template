@@ -1,3 +1,4 @@
 # node modules and final dist
+node_modules
 sample/a11y_sample/node_modules
 sample/a11y_sample/out
