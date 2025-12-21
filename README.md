@@ -18,7 +18,7 @@ This was specifically created for [Ladybud Roll](https://jrjurman.itch.io/ladybu
 
 ## Requirements
 
-This depends on you being able to export your game with [love.js](https://github.com/2dengine/love.js).
+This depends on you being able to export your game with [love.js](https://github.com/Davidobot/love.js).
 
 ## What is it?
 
@@ -26,7 +26,7 @@ There are three files included in this project that you can copy or reference fo
 
 <dl>
 
-<dt><code>a11y_template.html</code></dt>
+<dt><code>template.html</code></dt>
 <dd>
 
 This is a modified template for love.js, and the core part of this project. This template adds a live aria element to read out any text to screen readers that has been printed with `print('tts:')`. For low-vision users that need pinch-zoom capabilities, we've also disabled the `wheel` event handlers on the canvas that were disabling that.Additionally, this centers and expands the default frame of the game canvas.
@@ -51,7 +51,7 @@ function love.load()
 end
 ```
 
-These will be consumed by the html template to be read out by screen readers. This text will also be visible for sighted users looking at the page.
+These will be consumed by the html template to be read out by screen readers.
 
 
 ## How to Run your game
