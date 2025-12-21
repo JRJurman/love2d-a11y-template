@@ -19,7 +19,17 @@ function love.draw()
 	end
 end
 
+-- for unknown reasons, love.js can sometimes read the arrow keys in safari as the following
+-- https://github.com/JRJurman/love2d-a11y-template/issues/1
+local remap = {
+  kp8 = "up",
+  kp2 = "down",
+  kp4 = "left",
+  kp6 = "right",
+}
+
 function love.keypressed(key)
+  key = remap[key] or key
 	if key == "up" then
 		count = math.min(count + 1, 99)
 	elseif key == "down" then

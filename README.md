@@ -12,7 +12,7 @@ end
 
 ## Motivation
 
-This template gives developers an easy and cross-platform interface for interacting with Screen Readers, using browser-based APIs. The browser-based support means that Blind and Low-Vision users can use the Screen Readers (like NVDA and VoiceOver) that they are most comfortable with, with all the configurations they are used to.
+This template gives developers an easy and cross-platform interface for interacting with Screen Readers, using browser-based APIs. The browser-based support means that Blind and Low-Vision users can use installed Screen Readers (like NVDA and VoiceOver) that they are most comfortable with, with all the configurations they are used to.
 
 This was specifically created for [Ladybud Roll](https://jrjurman.itch.io/ladybud-roll), an entry in the [Games for Blind Gamers](https://itch.io/jam/games-for-blind-gamers-4) game jam.
 
